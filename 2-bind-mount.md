@@ -17,21 +17,23 @@ docker run -d --name <nombre contenedor> --mount type=bind,source=<ruta carpeta 
 ### Crear un contenedor con la imagen nginx:alpine, mapear todos por puertos, para la ruta carpeta host colocar el directorio en donde se encuentra la carpeta html en tu computador y para la ruta carpeta contenedor: /usr/share/nginx/html (esta ruta se obtiene al revisar la documentación de la imagen)
 ![Volúmenes](volumen-host.PNG)
 # COMPLETAR CON EL COMANDO
+docker run -d --name nginx-practica1 -p 8080:80 --mount "type=bind,source=C:\docker\nginx\html,target=/usr/share/nginx/html" nginx:alpine
 
 ### ¿Qué sucede al ingresar al servidor de nginx?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+#### Al ingresar al servidor Nginx se muestra el error 403 Forbidden debido a que  carpeta del equipo montada en /usr/share/nginx/html está vacía y no contiene un archivo index.html que la imagen Nginx pueda mostrar.
 
 ### ¿Qué pasa con el archivo index.html del contenedor?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+#### El archivo index.html original del contenedor queda  d emanera oculta  por el bind mount, ya que la carpeta del equipo se monta sobre el directorio web de Nginx. El archivo original no se elimina, pero deja de ser visible mientras el montaje esté activo.
 
 ### Ir a https://html5up.net/ y descargar un template gratuito, descomprirlo dentro de tu computador en la carpeta html
+
 ### ¿Qué sucede al ingresar al servidor de nginx?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+#### Al ingresar al servidor Nginx se muestra la página web de la plantilla descargada de HTML5 UP debido que sus archivos se encuentran en el directorio del equipo vinculado al contenedor mediante el bind mount.
 
 ### Eliminar el contenedor
-# COMPLETAR CON EL COMANDO
+#### docker rm -f nginx-practica1
 
 ### ¿Qué sucede al crear nuevamente un contenedor montado al directorio definidos anteriormente?
-# COMPLETAR CON LA RESPUESTA A LA PREGUNTA
+#### La plantilla descargada se vuelve a visualizar porque los archivos permanecen en el equipo y al crear otro contenedor montando la misma carpeta, Nginx puede acceder nuevamente a esos archivos.
 
 
